@@ -1,0 +1,41 @@
+package com.ccunix.ihousekeeping.exam.service;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ccunix.ihousekeeping.base.domain.AppDataModel;
+import com.ccunix.ihousekeeping.base.service.BaseService;
+import com.ccunix.ihousekeeping.basedb.dao.Tb_submit_Dao_Iface;
+import com.ccunix.ihousekeeping.basedb.domain.Tb_submit;
+
+@Service("Exam_Service_Impl")
+@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+public class Exam_Service_Impl extends BaseService implements Exam_Service_Iface {
+
+	
+	@Resource
+	Tb_submit_Dao_Iface tb_submit_Dao_Iface;
+	
+	@Override
+	public AppDataModel add_exma_user(Tb_submit tb_submit) {
+		
+		AppDataModel appDataModel = getAppDataModel();
+		
+		try {
+			tb_submit_Dao_Iface.insert_tb_submit(tb_submit);
+			appDataModel.data.put("school", "gydx");
+			appDataModel.status = 0;
+		} catch (Exception e) {
+			appDataModel.status = 1;
+			appDataModel.message="增加考试答案失败";
+			e.printStackTrace();
+		}
+		
+		
+		return appDataModel;
+	}
+
+}

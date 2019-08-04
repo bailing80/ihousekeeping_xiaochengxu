@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccunix.ihousekeeping.basedb.dao.Bailing_Dao_Iface" >
+<cache type="com.ccunix.ihousekeeping.base.util.RedisCache" />
+<resultMap type="com.ccunix.ihousekeeping.basedb.domain.Bailing" id="result_Bailing"/>
+<parameterMap type="com.ccunix.ihousekeeping.basedb.domain.Bailing" id="param_Bailing"/>
+<insert id="insert_bailing" parameterMap="param_Bailing" >
+
+insert into bailing   
+<trim prefix="(" suffix=")" suffixOverrides=",">
+<if test="deletetime != null and deletetime != ''">
+deletetime,
+ </if>
+<if test="answer != null and answer != ''">
+answer,
+ </if>
+<if test="id != null and id != ''">
+id,
+ </if>
+<if test="name != null and name != ''">
+name,
+ </if>
+<if test="phone != null and phone != ''">
+phone,
+ </if>
+<if test="creator != null and creator != ''">
+creator,
+ </if>
+<if test="updatetime != null and updatetime != ''">
+updatetime,
+ </if>
+<if test="is_delete != null and is_delete != ''">
+is_delete,
+ </if>
+<if test="delete_user != null and delete_user != ''">
+delete_user,
+ </if>
+<if test="updater != null and updater != ''">
+updater,
+ </if>
+<if test="createtime != null and createtime != ''">
+createtime,
+ </if>
+</trim>
+VALUES
+<trim prefix="(" suffix=")" suffixOverrides=",">
+<if test="deletetime != null and deletetime != ''">
+#{deletetime},
+ </if>
+<if test="answer != null and answer != ''">
+#{answer},
+ </if>
+<if test="id != null and id != ''">
+#{id},
+ </if>
+<if test="name != null and name != ''">
+#{name},
+ </if>
+<if test="phone != null and phone != ''">
+#{phone},
+ </if>
+<if test="creator != null and creator != ''">
+#{creator},
+ </if>
+<if test="updatetime != null and updatetime != ''">
+#{updatetime},
+ </if>
+<if test="is_delete != null and is_delete != ''">
+#{is_delete},
+ </if>
+<if test="delete_user != null and delete_user != ''">
+#{delete_user},
+ </if>
+<if test="updater != null and updater != ''">
+#{updater},
+ </if>
+<if test="createtime != null and createtime != ''">
+#{createtime},
+ </if>
+
+</trim>
+</insert>
+
+
+<update id="delete_bailing" parameterMap="param_Bailing" >
+update bailing set is_delete=1,deletetime=sysdate where  id=#{id}
+</update>
+<update id="update_bailing" parameterMap="param_Bailing" >update bailing   
+
+<set>
+<if test="deletetime != null and deletetime != ''">
+deletetime=#{deletetime},
+ </if>
+<if test="answer != null and answer != ''">
+answer=#{answer},
+ </if>
+<if test="name != null and name != ''">
+name=#{name},
+ </if>
+<if test="phone != null and phone != ''">
+phone=#{phone},
+ </if>
+<if test="creator != null and creator != ''">
+creator=#{creator},
+ </if>
+<if test="updatetime != null and updatetime != ''">
+updatetime=#{updatetime},
+ </if>
+<if test="is_delete != null and is_delete != ''">
+is_delete=#{is_delete},
+ </if>
+<if test="delete_user != null and delete_user != ''">
+delete_user=#{delete_user},
+ </if>
+<if test="updater != null and updater != ''">
+updater=#{updater},
+ </if>
+<if test="createtime != null and createtime != ''">
+createtime=#{createtime},
+ </if>
+
+</set>
+ where id=#{id}
+</update>
+<select id="queryAll_bailing" parameterMap="param_Bailing"  resultMap="result_Bailing">
+select DELETETIME,ANSWER,ID,NAME,PHONE,CREATOR,UPDATETIME,IS_DELETE,DELETE_USER,UPDATER,CREATETIME
+ from bailing where is_delete != 1<if test="deletetime != null and deletetime != ''">
+ and deletetime=#{deletetime}
+ </if>
+<if test="answer != null and answer != ''">
+ and answer=#{answer}
+ </if>
+<if test="id != null and id != ''">
+ and id=#{id}
+ </if>
+<if test="name != null and name != ''">
+ and name=#{name}
+ </if>
+<if test="phone != null and phone != ''">
+ and phone=#{phone}
+ </if>
+<if test="creator != null and creator != ''">
+ and creator=#{creator}
+ </if>
+<if test="updatetime != null and updatetime != ''">
+ and updatetime=#{updatetime}
+ </if>
+<if test="is_delete != null and is_delete != ''">
+ and is_delete=#{is_delete}
+ </if>
+<if test="delete_user != null and delete_user != ''">
+ and delete_user=#{delete_user}
+ </if>
+<if test="updater != null and updater != ''">
+ and updater=#{updater}
+ </if>
+<if test="createtime != null and createtime != ''">
+ and createtime=#{createtime}
+ </if>
+</select>
+
+
+
+
+
+</mapper>

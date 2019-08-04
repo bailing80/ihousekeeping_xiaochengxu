@@ -1,0 +1,37 @@
+package com.ccunix.ihousekeeping.exam.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ccunix.ihousekeeping.base.controller.BaseMultiController;
+import com.ccunix.ihousekeeping.base.domain.AppDataModel;
+import com.ccunix.ihousekeeping.base.domain.AppDataModel_Sec;
+import com.ccunix.ihousekeeping.base.util.UUID_Tools;
+import com.ccunix.ihousekeeping.basedb.domain.Tb_submit;
+import com.ccunix.ihousekeeping.exam.service.Exam_Service_Iface;
+
+@Controller
+@RequestMapping("Exam_Controller_4X")
+public class Exam_Controller_4X extends BaseMultiController {
+	
+	
+	@Resource
+	Exam_Service_Iface exam_service_iface;
+	
+	@RequestMapping("add_user_exam")
+	@ResponseBody
+	public AppDataModel_Sec add_user_exam(Tb_submit submit){
+		
+		System.out.println(submit.getName()+"====");
+		submit.setId(UUID_Tools.getUUID());
+		AppDataModel appDataModel = exam_service_iface.add_exma_user(submit);
+		
+		return getAppDataMode_sec().setData(encodeURI(appDataModel));
+		
+		
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.ccunix.ihousekeeping.exam.service;
+
+import com.ccunix.ihousekeeping.base.domain.AppDataModel;
+import com.ccunix.ihousekeeping.basedb.domain.Tb_submit;
+
+public interface Exam_Service_Iface {
+	
+	public AppDataModel add_exma_user(Tb_submit submit);
+
+}

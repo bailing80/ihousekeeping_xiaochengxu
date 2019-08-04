@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.ccunix.ihousekeeping.newexam.dao.Exam_Dao_Iface">
+
+	<cache type="com.ccunix.ihousekeeping.base.util.RedisCache" />
+
+	<parameterMap
+		type="com.ccunix.ihousekeeping.basedb.domain.Test" id="p_test"></parameterMap>
+	<parameterMap
+		type="com.ccunix.ihousekeeping.newexam.domain.QueryExamBean" id="p_qe"></parameterMap>
+	<parameterMap
+		type="com.ccunix.ihousekeeping.basedb.domain.Tb_submit" id="p_ts"></parameterMap>
+	<resultMap
+		type="com.ccunix.ihousekeeping.basedb.domain.Tb_base" id="r_tb"></resultMap>
+	<resultMap type="com.ccunix.ihousekeeping.basedb.domain.Book"
+		id="r_book"></resultMap>
+	<resultMap type="com.ccunix.ihousekeeping.basedb.domain.Test"
+		id="r_test"></resultMap>
+	<resultMap
+		type="com.ccunix.ihousekeeping.basedb.domain.Tb_submit" id="r_ts"></resultMap>
+	<select id="queryAllexam" resultMap="r_test">
+		select id,name from test
+	</select>
+	<select id="queryexam" parameterMap="p_qe" resultMap="r_tb">
+		select tpye,title,a,b,c,d from tb_base where title like
+		concat('%',concat(#{keyword},'%'))
+	</select>
+	<select id="query_commit" parameterMap="p_ts" resultMap="r_ts">
+		select * from Tb_submit where phone=#{phone}
+	</select>
+	<select id="queryAnswerList" parameterMap="p_ts"
+		resultMap="r_ts">
+		select * from BAILING order by answer desc
+	</select>
+	
+
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccunix.ihousekeeping.basedb.dao.Book_Dao_Iface" >
+<cache type="com.ccunix.ihousekeeping.base.util.RedisCache" />
+<resultMap type="com.ccunix.ihousekeeping.basedb.domain.Book" id="result_Book"/>
+<parameterMap type="com.ccunix.ihousekeeping.basedb.domain.Book" id="param_Book"/>
+<insert id="insert_book" parameterMap="param_Book" >
+
+insert into book   
+<trim prefix="(" suffix=")" suffixOverrides=",">
+<if test="count != null and count != ''">
+count,
+ </if>
+<if test="book != null and book != ''">
+book,
+ </if>
+</trim>
+VALUES
+<trim prefix="(" suffix=")" suffixOverrides=",">
+<if test="count != null and count != ''">
+#{count},
+ </if>
+<if test="book != null and book != ''">
+#{book},
+ </if>
+
+</trim>
+</insert>
+
+
+<update id="delete_book" parameterMap="param_Book" >
+update book set is_delete=1,deletetime=sysdate where  id=#{id}
+</update>
+<update id="update_book" parameterMap="param_Book" >update book   
+
+<set>
+<if test="count != null and count != ''">
+count=#{count},
+ </if>
+<if test="book != null and book != ''">
+book=#{book},
+ </if>
+
+</set>
+ where id=#{id}
+</update>
+<select id="queryAll_book" parameterMap="param_Book"  resultMap="result_Book">
+select COUNT,BOOK
+ from book where is_delete != 1<if test="count != null and count != ''">
+ and count=#{count}
+ </if>
+<if test="book != null and book != ''">
+ and book=#{book}
+ </if>
+</select>
+
+
+
+
+
+</mapper>

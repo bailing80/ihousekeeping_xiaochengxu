@@ -1,0 +1,10 @@
+package com.ccunix.ihousekeeping.exam.dao;
+
+import java.util.List;
+
+public interface Exam_Dao_Iface {
+	
+	
+	public List queryAllexam() throws Exception;
+
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccunix.ihousekeeping.borrowbook.dao.Borrowbook_Dao_Iface">
+
+	<cache type="com.ccunix.ihousekeeping.base.util.RedisCache" />
+	<resultMap type="com.ccunix.ihousekeeping.basedb.domain.Book" id="result_Book">
+	</resultMap>
+    <select id="showbook" resultMap="result_Book"> 
+select COUNT from book
+    </select>
+ </mapper>
